@@ -1,0 +1,53 @@
+Classes:
+    - Client (a customer)
+    - Account (a financial account)
+    - Transaction records
+    - Transaction handler
+
+Relationships:
+    - Clients have accounts (aggregation)
+
+Things to note:
+    - System must be capable of supporting additional account types (subclasses),
+        business rules, and reporting requirements
+
+
+
+Client attributes:
+- Name
+- Phone
+- Email
+- Address
+- ID (primary key)
+- Preferred contact
+
+Client methods:
+- Change name
+- Change phone
+- Change email
+- Change address
+- Change preferred contact
+- View preferred contact
+- View name
+- View ID
+- View phone
+- View email
+- View address
+
+Account attributes:
+- ID (primary key)
+- Description
+- Account Type
+- Current Balance
+
+Account methods:
+- Deposit (into account)
+- Withdraw (from account)
+- Transact (with another client's account)
+- Check balance
+
+
+Transaction handler methods:
+- Deposit
+- Withdrawal
+- Transfers

@@ -30,7 +30,7 @@ class Account:
         if isinstance(amount, (int, float)) and amount >= 0:
             self.__current_balance += amount
             print(f"You have deposited ${amount} into account ({self.__id}).")
-            print(f"Total account balance: ${self.__current_balance}")
+            print(f"Updated account balance: ${self.__current_balance}")
 
         print()
 
@@ -42,7 +42,7 @@ class Account:
             else:
                 self.__current_balance -= amount
                 print(f"You have withdrawn ${amount} from account ({self.__id}).")
-                print(f"Total account balance: ${self.__current_balance}")
+                print(f"Updated account balance: ${self.__current_balance}")
 
         print()
 

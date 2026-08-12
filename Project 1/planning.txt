@@ -47,7 +47,13 @@ Account methods:
 - Check balance
 
 
-Transaction handler methods:
-- Deposit
-- Withdrawal
-- Transfers
+Transaction attributes:
+- id (PK)
+- amount
+- type
+- description
+- status
+
+Transaction methods:
+- Process transaction
+- Cancel transaction

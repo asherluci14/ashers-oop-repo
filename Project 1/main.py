@@ -1,5 +1,7 @@
 from client import Client
 from account import Account
+from branch import Branch
+from transaction import Transaction
 
 client_1 = Client(
     name="John Doe",
@@ -29,14 +31,24 @@ account_1 = Account(100, 'savings', 'For savings.')
 account_2 = Account(20)
 account_3 = Account(1738)
 
-print(client_1.get_name())
-print(client_2.get_email())
-print(client_2.get_id())
-print(client_3.get_id())
+transaction_1 = Transaction(20, 'deposit')
+transaction_2 = Transaction(30, 'withdraw')
+transaction_3 = Transaction(50, 'deposit')
 
-account_1.deposit(20)
-account_3.deposit(999)
-account_2.withdraw(40)
-account_2.withdraw(5)
-account_3.withdraw(50)
+branch_1 = Branch(1, 'location1', '5000', '0411111111')
+branch_2 = Branch(2, 'location2', '5001', '0422222222')
+branch_3 = Branch(3, 'location3', '5002', '0433333333')
 
+
+# -------------------------------------------------------------
+
+client_1.set_phone('0412345678')
+account_1.deposit(300)
+account_2.withdraw(300)
+transaction_1.process_transaction()
+transaction_2.cancel_transaction()
+transaction_2.process_transaction()
+branch_1.open_branch()
+branch_2.open_branch()
+branch_3.close_branch()
+branch_2.change_phone('0412345678')

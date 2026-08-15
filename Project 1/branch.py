@@ -8,6 +8,13 @@ class Branch:
         self.phone = phone
         self.is_open = is_open
 
+    def __str__(self):
+        open_text = "open" if self.is_open else "not open"
+        return f"Branch {self.number} ({self.name} branch) at {self.location}. Currently {open_text}. PH: {self.phone}"
+
+    def __repr__(self):
+        return f"Branch({self.number}, {self.name}, {self.location}, {self.phone}, {self.is_open})"
+
     def set_phone(self, new_phone):
         if isinstance(new_phone, (int, str)):  # Potentially add some proper phone number checking here (char lim)
             self.phone = new_phone

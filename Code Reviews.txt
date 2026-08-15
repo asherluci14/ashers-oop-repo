@@ -1,0 +1,54 @@
+Date -- who with
+Brief Title
+Short sentence descriptions of the conversation (Code review)
+Include a point of reflection (what did I learn) and what my planned actions are
+
+--------------------------------------------
+WEEK 2 - How to work with public/private variables
+13 August 2026 with Arie
+
+Today Arie and I talked about how I have my public and private variables set. Arie taught me how public variables have
+public read AND WRITE access. Thus, by default, most variables should be set to private, and then read/write access is
+provided through getters and setters. We also looked at how such variables are handled in Python vs. lower-level
+languages like C++, where, for example, when using linked lists, the separate nodes can naturally be "separated" from
+the rest of the memory, meaning it's OK for them to be public. I also had the opportunity to consider adding more input
+validations within my constructors.
+
+My next steps are to change my design to change most of the variables to private attributes. Then I will add getters
+(and setters where appropriate) to control the public interface of the classes.
+
+
+
+
+
+
+# Implement your code here
+class Layer:
+    def __init__(self):
+        self.size = 8
+        self.__flavour = "Chocolate"
+        self.is_baked = False  # Should always be False upon construction
+
+    def __str__(self):
+        return f"{str(self.size)}\" {self.get_flavour()} tier."
+
+    def get_flavour(self):
+        return self.__flavour
+
+    def set_flavour(self, new_flavour):
+        if self.is_baked:
+            print("This layer is already baked, you cannot change the flavour.")
+        else:
+            if isinstance(new_flavour, str):
+                self.__flavour = new_flavour
+
+    def bake():
+        if not is_baked:
+            self.is_baked = True
+            print(f"3, 2, 1... *Ding* The {self.get_flavour()} tier is ready.")
+        else:
+            print("This layer is already baked!")
+
+
+class Cake:
+    def __init__(self):

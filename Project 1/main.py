@@ -42,6 +42,9 @@ branch_3 = Branch(3, 'location3', '5002', '0433333333')
 
 # -------------------------------------------------------------
 
+print(client_1)
+print(repr(client_1))
+
 client_1.set_phone('0412345678')
 account_1.deposit(300)
 account_2.withdraw(300)
@@ -52,3 +55,15 @@ branch_1.open_branch()
 branch_2.open_branch()
 branch_3.close_branch()
 branch_2.change_phone('0412345678')
+
+print(branch_1)
+print(repr(branch_1))
+
+print(client_1)
+print(repr(client_1))  # phone number was changed
+
+print(account_1)
+print(repr(account_1))
+
+print(transaction_1)
+print(repr(transaction_1))

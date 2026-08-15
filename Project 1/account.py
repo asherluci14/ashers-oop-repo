@@ -8,10 +8,16 @@ class Account:
         self.__current_balance = current_balance
         self.description = description
 
-
         # ID assignment logic (auto-increment +1 for every new instance)
         Account.id_counter += 1
         self.__id = Account.id_counter
+
+    def __str__(self):
+        return (f"{self.get_account_type().capitalize()} account (id: {self.get_id()}) "
+                f"has ${self.get_current_balance()}.")
+
+    def __repr__(self):
+        return f"Account(id={self.get_id()}, {self.get_current_balance()}, {self.get_account_type()})"
 
     def get_account_type(self):
         return self.account_type
@@ -22,8 +28,11 @@ class Account:
     def get_description(self):
         return self.description
 
+    def get_id(self):
+        return self.__id
+
     def set_account_type(self, new_account_type):
-        if isinstance(new_account_type, str) and new_account_type.lower().string() in Account.valid_accounts:
+        if isinstance(new_account_type, str) and new_account_type.lower().strip() in Account.valid_accounts:
             self.account_type = new_account_type
 
     def deposit(self, amount):  # Adds money to the account
@@ -37,14 +46,17 @@ class Account:
     def withdraw(self, amount):  # Attempts to remove money from the account
         if isinstance(amount, (int, float)) and amount >= 0:
             if self.__current_balance - amount < 0:
-                print(f"You tried to withdraw ${amount} from account ({self.__id}). (Balance: ${self.__current_balance})")
-                print("You cannot withdraw more money than the account contains. Please try again.")
+                print(
+                    f"You tried to withdraw ${amount} from account ({self.__id}). (Balance: ${self.__current_balance})")
+                print(
+                    "You cannot withdraw more money than the account contains. Please try again.")
             else:
                 self.__current_balance -= amount
-                print(f"You have withdrawn ${amount} from account ({self.__id}).")
+                print(
+                    f"You have withdrawn ${amount} from account ({self.__id}).")
                 print(f"Updated account balance: ${self.__current_balance}")
 
         print()
 
     def check_balance(self):
-        print(f"Your balance is ${self.__current_balance}")
+        print(f"Your balance is ${self.get_current_balance()}")

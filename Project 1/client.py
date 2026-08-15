@@ -14,6 +14,13 @@ class Client:
         Client.id_counter += 1
         self.__id = Client.id_counter
 
+    def __str__(self):
+        return f"This is client {self.get_id()}, {self.get_name()}. Prefers contact via {self.get_preferred_contact()}."
+
+    def __repr__(self):
+        return (f"Client({self.name}, {self.get_phone()}, {self.get_email()}, {self.get_address()}, "
+                f"{self.preferred_contact})")
+
     def get_name(self):
         return self.name
 

@@ -36,3 +36,4 @@ cyclist2.turn('left')
 cyclist3.turn('right')
 cyclist3.toggle_protection()
 cyclist1.toggle_protection()
+

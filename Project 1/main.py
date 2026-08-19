@@ -3,6 +3,9 @@ from account import Account
 from branch import Branch
 from transaction import Transaction
 
+# ----------------------------- Object Instantiation --------------------------------
+
+
 client_1 = Client(
     name="John Doe",
     phone="+1-555-0101",
@@ -35,9 +38,9 @@ transaction_1 = Transaction(20, 'deposit')
 transaction_2 = Transaction(30, 'withdraw')
 transaction_3 = Transaction(50, 'deposit')
 
-branch_1 = Branch(1, 'location1', '5000', '0411111111')
-branch_2 = Branch(2, 'location2', '5001', '0422222222')
-branch_3 = Branch(3, 'location3', '5002', '0433333333')
+branch_1 = Branch('location1', '5000', '0411111111')
+branch_2 = Branch('location2', '5001', '0422222222')
+branch_3 = Branch('location3', '5002', '0433333333')
 
 
 # -------------------------------------------------------------

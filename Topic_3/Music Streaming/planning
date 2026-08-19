@@ -1,0 +1,9 @@
+Entities:
+- Songs
+- Playlists
+- Listeners (users)
+
+
+Songs have their own attributes.
+A playlists manages a collection of existing songs (aggregation) and controls which song is currently selected.
+Listener can select and play a playlist but does not own the playlist or the songs within it (association).

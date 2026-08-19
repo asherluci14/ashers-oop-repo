@@ -1,16 +1,36 @@
 class Account:
 
-    id_counter = 0
-    valid_accounts = ['everyday', 'savings']
+    __id_counter = 0
+    __valid_accounts = ['everyday', 'savings']
 
     def __init__(self, current_balance=0, account_type='everyday', description=''):
-        self.account_type = account_type
-        self.__current_balance = current_balance
-        self.description = description
 
         # ID assignment logic (auto-increment +1 for every new instance)
-        Account.id_counter += 1
-        self.__id = Account.id_counter
+        Account.__id_counter += 1
+        self.__id = Account.__id_counter
+
+        # TODO: implement proper error raising instead of setting default values
+
+        if isinstance(account_type, str) and account_type.lower().strip() in Account.__valid_accounts:
+            self.__account_type = account_type
+        else:
+            print("Account type must be \"everyday\" or \"savings\".")
+            self.__account_type = "savings"
+            print("Account type has been set to \"savings\".")
+
+        if isinstance(current_balance, (int, float)):
+            self.__current_balance = current_balance
+        else:
+            print("Current balance must be an integer or a float number.")
+            self.__current_balance = 0
+            print("Current balance has been set to 0.")
+
+        if isinstance(description, str):
+            self.__description = description
+        else:
+            print("Description must be a string.")
+            self.__description = ""
+            print("Description has been set to an empty string.")
 
     def __str__(self):
         return (f"{self.get_account_type().capitalize()} account (id: {self.get_id()}) "
@@ -20,20 +40,28 @@ class Account:
         return f"Account(id={self.get_id()}, {self.get_current_balance()}, {self.get_account_type()})"
 
     def get_account_type(self):
-        return self.account_type
+        return self.__account_type
 
     def get_current_balance(self):
         return self.__current_balance
 
     def get_description(self):
-        return self.description
+        return self.__description
 
     def get_id(self):
         return self.__id
 
     def set_account_type(self, new_account_type):
-        if isinstance(new_account_type, str) and new_account_type.lower().strip() in Account.valid_accounts:
-            self.account_type = new_account_type
+        if isinstance(new_account_type, str) and new_account_type.lower().strip() in Account.__valid_accounts:
+            self.__account_type = new_account_type
+        else:
+            print("Account type must be \"everyday\" or \"savings\".")
+
+    def set_description(self, new_desc):
+        if isinstance(new_desc, str):
+            self.__description = new_desc
+        else:
+            print("New description must be a string.")
 
     def deposit(self, amount):  # Adds money to the account
         if isinstance(amount, (int, float)) and amount >= 0:

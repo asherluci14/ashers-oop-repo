@@ -81,3 +81,12 @@ client_1.remove_account(account_1)
 print(client_1.get_account_list())
 
 print(account_1.get_current_balance())
+
+
+# ------------ Client-Branch Association Testing ------------
+client_1.set_preferred_branch(branch_1)
+print(client_1.get_preferred_branch())
+client_1.set_preferred_branch(branch_2)
+print(client_1.get_preferred_branch())
+client_1.clear_preferred_branch()
+print(client_1.get_preferred_branch())

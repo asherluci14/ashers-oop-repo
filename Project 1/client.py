@@ -1,4 +1,6 @@
 from account import Account
+from branch import Branch
+
 
 class Client:
 
@@ -47,6 +49,8 @@ class Client:
 
         self.__account_list = []  # Clients can have multiple accounts
 
+        self.__preferred_branch = ""
+
     def __str__(self):
         return f"This is client {self.get_id()}, {self.get_name()}. Prefers contact via {self.get_preferred_contact()}."
 
@@ -75,6 +79,9 @@ class Client:
     def get_account_list(self):
         return self.__account_list
 
+    def get_preferred_branch(self):
+        return self.__preferred_branch
+
     def set_name(self, new_name):
         if isinstance(new_name, str):
             self.__name = new_name
@@ -95,7 +102,7 @@ class Client:
 
     def set_address(self, new_address):
         if isinstance(new_address, str):
-            self.__email = new_address
+            self.__address = new_address
         else:
             print("New address must be a string.")
 
@@ -104,6 +111,15 @@ class Client:
             self.__preferred_contact = new_contact
         else:
             print("Preferred contact can only be either \"phone\" or \"email\".")
+
+    def set_preferred_branch(self, branch):
+        if isinstance(branch, Branch) or branch == "":
+            self.__preferred_branch = branch
+        else:
+            print("Preferred branch must be a Branch object!")
+
+    def clear_preferred_branch(self):
+        self.set_preferred_branch("")
 
     def clear_account_list(self):
         self.__account_list.clear()

@@ -1,3 +1,5 @@
+from account import Account
+
 class Client:
 
     __id_counter = 0  # Used for assigning IDs to new clients
@@ -43,6 +45,8 @@ class Client:
             self.__preferred_contact = "email"
             print("Preferred contact has been set to \"email\".")
 
+        self.__account_list = []  # Clients can have multiple accounts
+
     def __str__(self):
         return f"This is client {self.get_id()}, {self.get_name()}. Prefers contact via {self.get_preferred_contact()}."
 
@@ -67,6 +71,9 @@ class Client:
 
     def get_preferred_contact(self):
         return self.__preferred_contact
+
+    def get_account_list(self):
+        return self.__account_list
 
     def set_name(self, new_name):
         if isinstance(new_name, str):
@@ -97,3 +104,25 @@ class Client:
             self.__preferred_contact = new_contact
         else:
             print("Preferred contact can only be either \"phone\" or \"email\".")
+
+    def clear_account_list(self):
+        self.__account_list.clear()
+        print("The account list has been cleared and is now empty.")
+
+    def add_account(self, account):
+        if account not in self.__account_list:
+            if isinstance(account, Account):
+                self.__account_list.append(account)
+            else:
+                print("New account must be an Account object.")
+        else:
+            print("This account already belongs to this client!")
+
+    def remove_account(self, account):
+        if account in self.__account_list:
+            if isinstance(account, Account):
+                self.__account_list.remove(account)
+            else:
+                print("You must provide an Account object.")
+        else:
+            print("This account does not belong to this client.")

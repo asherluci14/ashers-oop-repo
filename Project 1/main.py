@@ -70,3 +70,14 @@ print(repr(account_1))
 
 print(transaction_1)
 print(repr(transaction_1))
+
+# ------------- Client-Account Aggregation Testing ---------------
+
+client_1.add_account(account_1)
+client_1.add_account(account_3)
+client_2.add_account(account_2)
+print(client_1.get_account_list())
+client_1.remove_account(account_1)
+print(client_1.get_account_list())
+
+print(account_1.get_current_balance())

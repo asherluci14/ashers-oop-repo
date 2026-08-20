@@ -1,6 +1,12 @@
+"""
+This class represents a client of the financial company.
+Its responsibility is to store/manage information about a client.
+It also manages the client's list of financial accounts, and allows
+them to set a preferred branch.
+"""
+
 from account import Account
 from branch import Branch
-
 
 class Client:
 

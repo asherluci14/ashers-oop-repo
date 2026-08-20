@@ -18,37 +18,24 @@ My next steps are to change my design to change most of the variables to private
 (and setters where appropriate) to control the public interface of the classes.
 
 
+--------------------------------------------
+WEEK 3 - Reviewing SOLID principles and OOP design
+20th August 2026 with Arie
 
+In this session Arie and I discussed the current design of my financial system. He explained to me each of the SOLID
+principles, and we discussed that when writing code, it can be more useful to focus on where the principles are being
+violated instead of where they're demonstrated. Although my system is still quite simple at the present time, we
+looked at where there could potentially be design errors, and we also discussed future plans such as implementing
+proper error raising, and how we will expand the system in coming weeks. For example, I thought that when classes
+assigned themselves IDs in addition to managing information about themselves, it may have violated the Single
+Responsibility Principle (SRP), but Arie said if the classes are managing their own IDs then they were not particularly
+violating anything -- although it could be an issue if, say, the Branch class managed the IDs for the Client class.
 
+Arie also suggested that it's generally better to keep classes as separate as possible, or at least try to make them not
+depend on each other too much. Another thing that we discussed was whether class attributes (outside of the instance)
+should be included in the UML diagrams. Arie explained how it may be better to not include them as they are not really
+relevant to the user, but he urged me to make a post on Ed Discussion about it for extra opinions.
 
-
-# Implement your code here
-class Layer:
-    def __init__(self):
-        self.size = 8
-        self.__flavour = "Chocolate"
-        self.is_baked = False  # Should always be False upon construction
-
-    def __str__(self):
-        return f"{str(self.size)}\" {self.get_flavour()} tier."
-
-    def get_flavour(self):
-        return self.__flavour
-
-    def set_flavour(self, new_flavour):
-        if self.is_baked:
-            print("This layer is already baked, you cannot change the flavour.")
-        else:
-            if isinstance(new_flavour, str):
-                self.__flavour = new_flavour
-
-    def bake():
-        if not is_baked:
-            self.is_baked = True
-            print(f"3, 2, 1... *Ding* The {self.get_flavour()} tier is ready.")
-        else:
-            print("This layer is already baked!")
-
-
-class Cake:
-    def __init__(self):
+I learned a lot about SOLID principles and how to apply them. In fact, Ari said it's somewhat difficult to violate
+the principles if you're giving planning due process. As I move forward, I will take his advice to compare my code to
+the SOLID principles from time to time and check whether any principles have been violated or not.

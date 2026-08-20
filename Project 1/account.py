@@ -1,3 +1,10 @@
+"""
+This class represents an account that belongs to a client.
+It's responsible for managing the account's financial information,
+and it provides methods for depositing/withdrawing money and checking
+the current balance.
+"""
+
 class Account:
 
     __id_counter = 0
@@ -11,19 +18,19 @@ class Account:
 
         # TODO: implement proper error raising instead of setting default values
 
-        if isinstance(account_type, str) and account_type.lower().strip() in Account.__valid_accounts:
-            self.__account_type = account_type
-        else:
-            print("Account type must be \"everyday\" or \"savings\".")
-            self.__account_type = "savings"
-            print("Account type has been set to \"savings\".")
-
         if isinstance(current_balance, (int, float)):
             self.__current_balance = current_balance
         else:
             print("Current balance must be an integer or a float number.")
             self.__current_balance = 0
             print("Current balance has been set to 0.")
+
+        if isinstance(account_type, str) and account_type.lower().strip() in Account.__valid_accounts:
+            self.__account_type = account_type
+        else:
+            print("Account type must be \"everyday\" or \"savings\".")
+            self.__account_type = "savings"
+            print("Account type has been set to \"savings\".")
 
         if isinstance(description, str):
             self.__description = description

@@ -1,4 +1,10 @@
-# This class represents one branch of the organisation
+"""
+This class represents one branch of the organisation.
+It's responsible for storing/managing information about a branch,
+including its name, location, phone number, and open/closed status.
+It provides methods to view and change appropriate information,
+including the open/closed status.
+"""
 
 class Branch:
 
@@ -41,7 +47,7 @@ class Branch:
         return f"Branch {self.__number} ({self.__name} branch) at {self.__location}. Currently {open_text}. PH: {self.__phone}"
 
     def __repr__(self):
-        return f"Branch({self.__number}, {self.__name}, {self.__location}, {self.__phone}, {self.__is_open})"
+        return f"Branch(number={self.__number}, {self.__name}, {self.__location}, {self.__phone}, {self.__is_open})"
 
     def get_number(self):
         return self.__number

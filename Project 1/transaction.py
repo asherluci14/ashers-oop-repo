@@ -1,3 +1,9 @@
+"""
+This class represents a transaction made by an account.
+It stores information about a financial transaction, such as the
+amount of money, the type of transaction, and the status of the transaction.
+"""
+
 class Transaction:
 
     __transaction_num = 0

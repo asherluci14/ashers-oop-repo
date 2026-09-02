@@ -1,0 +1,20 @@
+Summary:
+- Necromancer can summon and control undead creatures
+- Necromancer gathers consumable magical resources for summoning rituals
+- Every ritual requires ectoplasm
+- Different undead require different combinations of:
+    - Necrotic Runes
+    - Spirit Runes
+    - Bone Runes
+    - Flesh Runes
+- Summoned undead begin at level 1 with their own starting health + power
+    - This can be levelled up
+
+
+
+Classes:
+- ResourceManager
+- SummoningRitual
+- Undead
+- Necromancer
+

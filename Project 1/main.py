@@ -5,7 +5,6 @@ from transaction import Transaction
 
 # ----------------------------- Object Instantiation --------------------------------
 
-
 client_1 = Client(
     name="John Doe",
     phone="+1-555-0101",

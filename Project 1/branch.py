@@ -99,3 +99,9 @@ class Branch:
     def change_phone(self, new_phone):
         self.set_phone(new_phone)
         print(f"Branch {self.__number}'s phone number has been set to {self.__phone}.")
+
+    number = property(get_number)
+    name = property(get_name)
+    location = property(get_location, set_location)
+    phone = property(get_phone, set_phone)
+    is_open = property(get_is_open)

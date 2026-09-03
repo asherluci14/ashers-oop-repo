@@ -58,10 +58,10 @@ class Client:
         self.__preferred_branch = ""
 
     def __str__(self):
-        return f"This is client {self.get_id()}, {self.get_name()}. Prefers contact via {self.get_preferred_contact()}."
+        return f"This is client {self.id}, {self.name}. Prefers contact via {self.preferred_contact}."
 
     def __repr__(self):
-        return (f"Client({self.__name}, {self.get_phone()}, {self.get_email()}, {self.get_address()}, "
+        return (f"Client({self.name}, {self.phone}, {self.email}, {self.address}, "
                 f"{self.__preferred_contact})")
 
     def get_name(self):
@@ -148,3 +148,12 @@ class Client:
                 print("You must provide an Account object.")
         else:
             print("This account does not belong to this client.")
+
+    name = property(get_name, set_name)
+    phone = property(get_phone, set_phone)
+    email = property(get_email, set_email)
+    address = property(get_address, set_address)
+    preferred_contact = property(get_preferred_contact, set_preferred_contact)
+    preferred_branch = property(get_preferred_branch, set_preferred_branch)
+    account_list = property(get_account_list)
+    id = property(get_id)

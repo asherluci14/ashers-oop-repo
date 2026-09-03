@@ -44,7 +44,7 @@ class ResourceManager:
         return (f"ResourceManager({self.__necrotic_runes}, {self.__spirit_runes}, {self.__bone_runes}, "
                 f"{self.__flesh_runes}, {self.__ectoplasm})")
 
-    def get_necrotic_runes(self):
+    def get_necrotic_runes(self) -> int:
         return self.__necrotic_runes
 
     def get_spirit_runes(self):
@@ -158,7 +158,7 @@ class Undead:
             self.__power = power
             self.__level = self.STARTING_LEVEL  # Level should always start at 1
 
-            print("Undead created successfully.")
+            print(f"{name} created successfully.")
 
     def get_id(self):
         return self.__id
@@ -195,7 +195,7 @@ class Undead:
                 self.__health += health
                 self.__power += power
             else:
-                print("Please provided appropriate data types for each argument (all must be integers).")
+                print("Please provide appropriate data types for each argument (all must be integers).")
 
     def __str__(self):
         return_text = f"An undead entity with the following properties:"
@@ -205,6 +205,10 @@ class Undead:
         return_text += f"\n - health: {self.__health} / {self.MAX_HEALTH}"
         return_text += f"\n - power: {self.__power} / {self.MAX_POWER}"
         return return_text
+
+    def __repr__(self):
+        return (f"Undead(id={self.__id}, name='{self.__name}', health={self.__health}, "
+                f"power={self.__power}, level={self.__level})")
 
     # Read-only properties
     id = property(get_id)
@@ -224,7 +228,7 @@ class SummoningRitual:
         ritual_costs = [necrotic_cost, spirit_cost, bone_cost, flesh_cost, ectoplasm_cost]
 
         if ectoplasm_cost <= 0:  # Ensures every ritual requires ectoplasm
-            print("Ectoplasm cost must be at least 1.")
+            print(f"Ectoplasm cost for {undead_name} must be at least 1.")
         elif ritual_costs in self.existing_rituals:  # Ensures two rituals don't have the same costs
             print("There is already a ritual with these resource costs.")
         else:
@@ -298,8 +302,6 @@ class SummoningRitual:
                 self.__ectoplasm_cost
             )
 
-            # TODO: I feel like there should be create_undead() here but I was not instructed to do this
-
             return True
         else:
             print("Provided argument must be a ResourceManager object.")
@@ -319,6 +321,103 @@ class SummoningRitual:
     bone_cost = property(get_bone_cost)
     flesh_cost = property(get_flesh_cost)
     ectoplasm_cost = property(get_ectoplasm_cost)
+
+
+class Necromancer:
+
+    MAX_UNDEAD = 20  # The max number of undead that can be controlled by one necromancer
+
+    def __init__(self, name):
+
+        if not isinstance(name, str):
+            print("The name must be a string.")
+        else:
+            self.__name = name
+            self.__resources = ResourceManager(0,0,0,0,0)
+            self.__undead = []
+            self.__summon_id = 0  # Should increment by 1 for each new summon created
+
+    def get_name(self):
+        return self.__name
+
+    def get_resources(self):
+        return self.__resources
+
+    def get_undead(self):
+        return self.__undead
+
+    def summon(self, ritual):
+        if isinstance(ritual, SummoningRitual):
+
+            if ritual.can_perform(self.__resources):
+                ritual.perform(self.__resources)  # All this does is spend the resources but doesn't create the undead
+
+                self.__summon_id += 1  # ID is incremented by 1
+
+                # A new undead is created and appended to the necromancer's list
+                self.__undead.append(ritual.create_undead(self.__summon_id))
+
+            else:
+                print("You do not have enough resources to cast this ritual.")
+
+        else:
+            print("The passed argument must be a SummoningRitual object.")
+
+    # Dismisses an undead based on its id
+    def dismiss(self, searched_id):
+        undead = self.find_undead(searched_id)
+
+        if isinstance(undead, Undead):
+            self.__undead.remove(undead)  # Removes the first (and only) undead with the matching ID from the list
+            print(f"Undead {searched_id} was dismissed.")
+            return True
+        else:
+            print(f"The dismissal of undead with ID {searched_id} was unsuccessful.")
+            return False
+
+    # Levels up an undead based on its id
+    def level_undead(self, searched_id, level, health, power):
+
+        undead = self.find_undead(searched_id)
+
+        if isinstance(undead, Undead):
+            undead.level_up(level, health, power)
+            print(f"Undead {searched_id} was levelled up.")
+            return True
+        else:
+            print(f"The levelling up of undead with ID {searched_id} was unsuccessful.")
+            return False
+
+    def find_undead(self, searched_id):
+        if isinstance(searched_id, int):
+
+            if len(self.__undead) > 0:
+                for undead in self.__undead:
+                    if undead.id == searched_id:
+                        return undead
+
+                print(f"An undead with the ID {searched_id} could not be found.")
+                return False  # Not sure whether to return False or None
+            else:
+                print("There are currently no undead being controlled by this necromancer.")
+                return False
+
+        else:
+            print("ID provided must be an integer.")
+            return False
+
+    def __str__(self):
+        return_string = f"For the necromancer {self.__name}:\n"
+        return_string += str(self.__resources)
+        return_string += f"\n\nThey also own the following undead:\n"
+        return_string += str(self.__undead)
+        return return_string
+
+    # Read-only properties
+    name = property(get_name)
+    resources = property(get_resources)
+    undead = property(get_undead)
+
 
 
 # --------------------------------------------------------------------
@@ -346,45 +445,58 @@ vengeful_ghost = SummoningRitual(
     spirit_cost=40,
     bone_cost=0,
     flesh_cost=0,
-    ectoplasm_cost=35
+    ectoplasm_cost=40
 )
 
 # 3. Putrid Zombie (High-health tank unit)
 putrid_zombie = SummoningRitual(
     name="Putrid Zombie",
     undead_name="Putrid Zombie",
-    starting_health=180,
+    starting_health=90,
     starting_power=10,
     necrotic_cost=20,
     spirit_cost=0,
     bone_cost=10,
     flesh_cost=60,
-    ectoplasm_cost=3
+    ectoplasm_cost=30
 )
 
 # 4. Phantom Guardian (Elite hybrid unit)
 phantom_guardian = SummoningRitual(
     name="Phantom Guardian",
     undead_name="Phantom Guardian",
-    starting_health=140,
-    starting_power=25,
+    starting_health=100,
+    starting_power=60,
     necrotic_cost=30,
     spirit_cost=30,
     bone_cost=25,
     flesh_cost=0,
-    ectoplasm_cost=20
+    ectoplasm_cost=100
 )
 
 
+necro = Necromancer("Asher")
+necro.resources.collect(10000,10000,10000,0,10000)
 
+print(necro.resources)
+necro.summon(phantom_guardian)
+print(necro.resources)
+necro.summon(vengeful_ghost)
+print(necro.resources)
 
-resources = ResourceManager(25,17,70,34,200)
-print(skeleton_warrior.can_perform(resources))
-print(vengeful_ghost.can_perform(resources))
-print(putrid_zombie.can_perform(resources))
-print(phantom_guardian.can_perform(resources))
+necro.summon(putrid_zombie)
+print(necro.resources)
 
-new_undead = skeleton_warrior.create_undead(1)
-print(new_undead)
-new_undead.level_up(20,0,20)
-print(new_undead)
+necro.resources.collect(0,0,0,10000,0)
+necro.summon(putrid_zombie)
+print(necro.resources)
+
+print(necro.find_undead(1))
+necro.level_undead(1, 29, 0, 20)
+print(necro.find_undead(1))
+
+print(necro.find_undead(2))
+necro.dismiss(2)
+print(necro.find_undead(2))
+
+print(necro)

@@ -39,3 +39,18 @@ relevant to the user, but he urged me to make a post on Ed Discussion about it f
 I learned a lot about SOLID principles and how to apply them. In fact, Ari said it's somewhat difficult to violate
 the principles if you're giving planning due process. As I move forward, I will take his advice to compare my code to
 the SOLID principles from time to time and check whether any principles have been violated or not.
+
+--------------------------------------------
+WEEK 4 - Review of the Necromancy game (Project 2)
+3 September 2026 with Arie
+
+First we discussed how my code for Project 2 was all in one main.py file because we were not instructed to split
+our code into modules. Arie clarified that going on from now, it's assumed that we should make variables private, and
+split our classes into modules. We also discussed looped or circular dependencies, and that when you design your
+classes, you should avoid making 2 classes rely on each other. It will cause problems that make the program not run,
+and this may be why the ResourceManager class is treated as a separate class from Necromancer even though 1 Necromancer
+has 1 ResourceManager. We also looked at my UML and clarified some logic.
+
+Moving forward, I will split my code into different modules. I will also aim for low coupling, making classes as
+independent as possible. I also learned that I need to include method parameters inside the UML, so I will need to
+add those parameters to all my UML diagrams so far.

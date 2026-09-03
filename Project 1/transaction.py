@@ -44,11 +44,11 @@ class Transaction:
             print("Status has been set to \"pending\".")
 
     def __str__(self):
-        return (f"Transaction {self.get_id()}. A {self.get_type()} for ${self.get_amount()}. "
-                f"Currently {self.get_status()}. Description: {self.get_description}")
+        return (f"Transaction {self.id}. A {self.type} for ${self.amount}. "
+                f"Currently {self.status}. Description: {self.description}")
 
     def __repr__(self):
-        return f"Transaction(id={self.get_id()}, {self.get_amount()}, {self.get_type()}, {self.get_status()})"
+        return f"Transaction(id={self.id}, {self.amount}, {self.type}, {self.status})"
 
     def get_amount(self):
         return self.__amount
@@ -86,3 +86,9 @@ class Transaction:
 
     def cancel_transaction(self):
         self.change_status('cancelled')
+
+    amount = property(get_amount)
+    status = property(get_status)
+    id = property(get_id)
+    type = property(get_type)
+    description = property(get_description, set_description)

@@ -18,3 +18,18 @@ Classes:
 - Undead
 - Necromancer
 
+-------------------------------------------------------
+Justifications for potential deviations from instructions
+
+- Necromancer has a compositional relationship with Undead:
+
+        This is the code inside Necromancer.summon() where the Undead object is created:
+
+        self.__undead.append(ritual.create_undead(self.__summon_id))
+
+        However, Undead are technically instantiated in the SummoningRitual class. Despite this,
+        Undead are not "owned" by the ritual, but rather are owned by the Necromancer. By that definition,
+        I have classified a compositional relationship between Necromancer and Undead, because Undead
+        is created inside Necromancer, it doesn't exist outside of Necromancer (it isn't just appended on),
+        and the Necromancer owns the Undead.
+

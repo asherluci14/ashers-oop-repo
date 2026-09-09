@@ -12,7 +12,7 @@ class Account:
     __id_counter = 0
     __valid_accounts = ['everyday', 'savings']
 
-    def __init__(self, current_balance=0, account_type='everyday', description=''):
+    def __init__(self, account_type, current_balance=0, description=''):
 
         # ID assignment logic (auto-increment +1 for every new instance)
         Account.__id_counter += 1
@@ -31,8 +31,8 @@ class Account:
             self.__account_type = account_type
         else:
             print("Account type must be \"everyday\" or \"savings\".")
-            self.__account_type = "savings"
-            print("Account type has been set to \"savings\".")
+            self.__account_type = None
+            print("Account type has been set to None.")
 
         if isinstance(description, str):
             self.__description = description
@@ -48,7 +48,7 @@ class Account:
                 f"has ${self.current_balance}.")
 
     def __repr__(self):
-        return f"Account(id={self.id}, {self.current_balance}, {self.account_type})"
+        return f"Account(id={self.id}, account_type={self.account_type},  current_balance={self.current_balance})"
 
     def get_account_type(self):
         return self.__account_type

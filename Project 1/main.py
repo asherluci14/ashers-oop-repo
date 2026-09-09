@@ -1,6 +1,8 @@
 from client import Client
-from account import Account
 from branch import Branch
+from savings_account import SavingsAccount
+from everyday_account import EverydayAccount
+from account import Account
 from transaction import Transaction
 
 # ----------------------------- Object Instantiation --------------------------------
@@ -29,9 +31,9 @@ client_3 = Client(
     preferred_contact="email"
 )
 
-account_1 = Account(100, 'savings', 'For savings.')
-account_2 = Account(20)
-account_3 = Account(1738)
+account_1 = SavingsAccount(100, 'savings', 3.5)
+account_2 = SavingsAccount(20, "", 3)
+account_3 = EverydayAccount(1738, "Everyday acc")
 
 branch_1 = Branch('location1', '5000', '0411111111')
 branch_2 = Branch('location2', '5001', '0422222222')
@@ -85,7 +87,17 @@ account_1.withdraw(300)
 account_2.withdraw(300)
 
 account_1.deposit(300)
+account_2.deposit(1000)
+account_3.deposit(13570)
+account_2.deposit(1000)
+account_2.withdraw(3000)
+account_2.withdraw(500)
 
 print(account_1.transactions)
 print(account_2.transactions)
 print(account_3.transactions)
+
+print(isinstance(account_1, Account))
+print(isinstance(account_3, Account))
+print(account_1)
+print(account_3)

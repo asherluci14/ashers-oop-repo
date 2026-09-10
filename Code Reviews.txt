@@ -54,3 +54,17 @@ has 1 ResourceManager. We also looked at my UML and clarified some logic.
 Moving forward, I will split my code into different modules. I will also aim for low coupling, making classes as
 independent as possible. I also learned that I need to include method parameters inside the UML, so I will need to
 add those parameters to all my UML diagrams so far.
+
+--------------------------------------------
+WEEK 5 - Necromancy Inheritance Clarification
+10 September 2026 with Arie
+
+In this session, I was confused about the way class attributes were handled in Python. Specifically, in a parent class,
+there was a class attribute and a method using that class attribute, and in a subclass, that class attribute was
+overwritten. Arie used his C++ expertise and explained how in C++, the preferred method would most likely be to
+override both the method and the class attribute in the subclass. Together, Arie and I tested this in my code, and it
+turned out that Python does override the class attribute from the subclasses and there is no need to also override the
+method.
+
+As we move forward, I will set the class attributes for all of the involved subclasses and proceed to test and ensure
+they continue to function properly. Then I will integrate all the subclasses into the SummoningRitual class.

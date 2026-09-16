@@ -8,3 +8,6 @@ class WarriorUndead(Undead):
     def command(self):
         super().command()
         print(f"The {self.name} does warrior-like things...")
+
+    def combat_style(self):
+        print(f"This undead specialises in direct martial combat.")

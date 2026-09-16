@@ -8,3 +8,6 @@ class CursedUndead(Undead):
     def command(self):
         super().command()
         print(f"The {self.name} does cursed things...")
+
+    def combat_style(self):
+        print(f"This undead specialises in cursed/supernatural combat.")

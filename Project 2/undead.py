@@ -23,7 +23,23 @@ class Undead:
             or power < self.MIN_POWER
             or power > self.MAX_POWER
         ):
-            print("Health and power must be within boundary limits.")
+            # Prints custom messages based on which parameters are under/over
+            # Uses if statements because all applicable issues should be addressed at once
+
+            undead_name = name  # Temporary variable for naming the undead
+
+            if health < self.MIN_HEALTH:
+                print(f"Health for \"{undead_name}\" must be at least {self.MIN_HEALTH}. You cannot set it to {health}.")
+
+            if health > self.MAX_HEALTH:
+                print(f"Health for \"{undead_name}\" cannot exceed {self.MAX_HEALTH}. You cannot set it to {health}.")
+
+            if power < self.MIN_POWER:
+                print(f"Power for \"{undead_name}\" must be at least {self.MIN_POWER}. You cannot set it to {power}.")
+
+            if power > self.MAX_POWER:
+                print(f"Power for \"{undead_name}\" cannot exceed {self.MAX_POWER}. You cannot set it to {power}.")
+
         else:
             self.__id = id
             self.__name = name

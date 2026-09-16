@@ -4,6 +4,7 @@ from skeleton_warrior import SkeletonWarrior
 from phantom_guardian import PhantomGuardian
 from vengeful_ghost import VengefulGhost
 from putrid_zombie import PutridZombie
+from death_knight import DeathKnight
 
 class SummoningRitual:
 
@@ -103,6 +104,8 @@ class SummoningRitual:
             return VengefulGhost(id, self.__undead_name, self.__starting_health, self.__starting_power)
         elif self.undead_name == "Putrid Zombie":
             return PutridZombie(id, self.__undead_name, self.__starting_health, self.__starting_power)
+        elif self.undead_name == "Death Knight":
+            return DeathKnight(id, self.__undead_name, self.__starting_health, self.__starting_power)
         else:
             return Undead(id, self.__undead_name, self.__starting_health, self.__starting_power)
 

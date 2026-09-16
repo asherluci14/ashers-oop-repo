@@ -55,6 +55,19 @@ phantom_guardian = SummoningRitual(
     ectoplasm_cost=100
 )
 
+# 4. Death Knight (Overpowered boss unit)
+death_knight = SummoningRitual(
+    name="Death Knight",
+    undead_name="Death Knight",
+    starting_health=200,
+    starting_power=200,
+    necrotic_cost=80,
+    spirit_cost=80,
+    bone_cost=80,
+    flesh_cost=80,
+    ectoplasm_cost=200
+)
+
 
 necro = Necromancer("Asher")
 necro.resources.collect(10000,10000,10000,10000,10000)
@@ -74,3 +87,10 @@ print(necro.find_undead(5))
 
 necro.find_undead(3).command()
 necro.find_undead(4).command()
+
+print("\n\n\n\n\nTESTING SEPARATOR\n\n\n\n")
+
+necro.summon(death_knight)
+print(necro.find_undead(6))
+necro.find_undead(6).level_up(10, 100, 50)
+print(necro.find_undead(6))

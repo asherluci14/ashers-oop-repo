@@ -5,8 +5,8 @@ class Undead:
     MIN_POWER = 0
     MAX_POWER = 100
     MAX_LEVEL = 100
-    HEALTH_PER_LEVEL = 2  # What does this even do? It was not clear in the specifications and is unused currently
-    POWER_PER_LEVEL = 2  # What does this even do? It was not clear in the specifications and is unused currently
+    HEALTH_PER_LEVEL = 2
+    POWER_PER_LEVEL = 2
     STARTING_LEVEL = 1
 
     def __init__(self, id, name, health, power):
@@ -64,27 +64,42 @@ class Undead:
     def get_level(self):
         return self.__level
 
-    def level_up(self, level, health, power):
+    def level_up(self, new_levels=1):
 
-        # Checks that the new values will not exceed the maximum allowed values
-        if (self.__level + level) > self.MAX_LEVEL:
-            print(f"Level cannot exceed {self.MAX_LEVEL}.")
-        elif (self.__health + health) > self.MAX_HEALTH:
-            print(f"Health level cannot exceed {self.MAX_HEALTH}.")
-        elif (self.__power + power) > self.MAX_POWER:
-            print(f"Power level cannot exceed {self.MAX_POWER}.")
+        if not isinstance(new_levels, int):
+            print(f"Level must be an integer. Level up for {self.name} was unsuccessful.")
+            return False
         else:
-            # Data type is validated before making any changes
+            new_level = self.level + new_levels
+            new_health = self.health + (new_levels * self.HEALTH_PER_LEVEL)
+            new_power = self.power + (new_levels * self.POWER_PER_LEVEL)
+
+            # First checks if any conditions are true, and then prints ALL applicable conditions
             if (
-                isinstance(level, int)
-                and isinstance(health, int)
-                and isinstance(power, int)
+                new_level > self.MAX_LEVEL
+                or new_health > self.MAX_HEALTH
+                or new_power > self.MAX_POWER
             ):
-                self.__level += level
-                self.__health += health
-                self.__power += power
+                print(f"\nYou cannot level up \"{self.name}\":\n")
+                if new_level > self.MAX_LEVEL:
+                    print(f"- New level ({new_level}) cannot exceed max level ({self.MAX_LEVEL}).")
+                if new_health > self.MAX_HEALTH:
+                    print(f"- New health ({new_health}) cannot exceed max health ({self.MAX_HEALTH}).")
+                if new_power > self.MAX_POWER:
+                    print(f"- New power ({new_power}) cannot exceed max power ({self.MAX_POWER}).")
+
+                print("\nLevel up was unsuccessful. Please try different parameters.\n")
+
+                return False
+
             else:
-                print("Please provide appropriate data types for each argument (all must be integers).")
+                self.__level = new_level
+                self.__health = new_health
+                self.__power = new_power
+
+                print(f"\n\"{self.name}\" (id: {self.id}) was levelled up by {new_levels} level(s).\n")
+
+                return True
 
     def __str__(self):
         return_text = f"An undead entity with the following properties:"

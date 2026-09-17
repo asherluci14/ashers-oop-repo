@@ -20,3 +20,7 @@ class DeathKnight(WarriorUndead, CursedUndead):
     def compare_combat_styles(self):
         WarriorUndead.combat_style(self)
         CursedUndead.combat_style(self)
+
+    # Added in the Code Review, not part of the specifications itself
+    def command(self):
+        super().command()

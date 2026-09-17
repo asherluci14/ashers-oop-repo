@@ -68,3 +68,23 @@ method.
 
 As we move forward, I will set the class attributes for all of the involved subclasses and proceed to test and ensure
 they continue to function properly. Then I will integrate all the subclasses into the SummoningRitual class.
+
+--------------------------------------------
+WEEK 6 - super(), the MRO, and the levelling functionality
+17 September 2026 with Arie
+
+Arie and I looked at two main things this session: my levelling functionality and the way that the MRO works with
+super().
+
+Currently, my levelling command inside Undead is level_up(self, level, health, power). I thought about it intuitively
+and self identified that with this system, HEALTH_PER_LEVEL and POWER_PER_LEVEL functionally do nothing. I recognised
+that I need to change my system to fully utilise these class attributes. Also, Arie and I discussed how the MRO works.
+We gave DeathKnight its own command() method, using super(), to see which class's method it would use. I initially
+thought it was going in reverse order, but upon closer inspection, each command() function had super() first, and THEN
+its own code. Because super() was run first, it would hold off running its own code, and instead it would go up the MRO
+chain first.
+
+As we move forward, I will change the levelling system into level_up(self, level) so that it only takes how many levels
+to level up by as its only parameter, with a default value of 1. I will then test the new system to ensure it works
+with everything else as intended. For the MRO, none of my code was incorrect, but it's important to keep it in mind as
+the project proceeds.

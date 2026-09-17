@@ -1,13 +1,11 @@
 from summoning_ritual import SummoningRitual
 from necromancer import Necromancer
 
-from undead import Undead
-
 # 1. Undead Skeleton Warrior (Low-cost physical unit)
 skeleton_warrior = SummoningRitual(
     name="Skeleton Warrior",
     undead_name="Skeleton Warrior",
-    starting_health=100,
+    starting_health=50,
     starting_power=15,
     necrotic_cost=10,
     spirit_cost=0,
@@ -72,25 +70,7 @@ death_knight = SummoningRitual(
 necro = Necromancer("Asher")
 necro.resources.collect(10000,10000,10000,10000,10000)
 
-necro.summon(phantom_guardian)
-necro.summon(vengeful_ghost)
-necro.summon(phantom_guardian)
-necro.summon(putrid_zombie)
-necro.summon(vengeful_ghost)
-
-print(necro.undead)
-
-print(necro.find_undead(4).MAX_HEALTH)  # Should return 80 if inheritance and overriding was successful
-
-necro.find_undead(5).level_up(9, 40, 20)
-print(necro.find_undead(5))
-
-necro.find_undead(3).command()
-necro.find_undead(4).command()
-
-print("\n\n\n\n\nTESTING SEPARATOR\n\n\n\n")
-
-necro.summon(death_knight)
-print(necro.find_undead(6))
-necro.find_undead(6).level_up(10, 100, 50)
-print(necro.find_undead(6))
+necro.summon(skeleton_warrior)
+print(necro.find_undead(1))
+necro.level_undead(1, 3)
+print(necro.find_undead(1))

@@ -55,14 +55,19 @@ class Necromancer:
             return False
 
     # Levels up an undead based on its id
-    def level_undead(self, searched_id, level, health, power):
+    def level_undead(self, searched_id, new_levels):
 
         undead = self.find_undead(searched_id)
 
         if isinstance(undead, Undead):
-            undead.level_up(level, health, power)
-            print(f"Undead {searched_id} was levelled up.")
-            return True
+            result = undead.level_up(new_levels)
+
+            # Errors can occur inside undead.level_up(new_levels), so it will only return True if it was successful
+            if result:
+                return True
+            else:
+                return False
+
         else:
             print(f"The levelling up of undead with ID {searched_id} was unsuccessful.")
             return False

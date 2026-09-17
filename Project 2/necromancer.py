@@ -29,12 +29,21 @@ class Necromancer:
         if isinstance(ritual, SummoningRitual):
 
             if ritual.can_perform(self.__resources):
-                ritual.perform(self.__resources)  # All this does is spend the resources but doesn't create the undead
 
-                self.__summon_id += 1  # ID is incremented by 1
+                # create_undead() may fail. This does error checking so that it is only appended to the Necromancer's
+                # list if it is a valid object
 
-                # A new undead is created and appended to the necromancer's list
-                self.__undead.append(ritual.create_undead(self.__summon_id))
+                new_undead = ritual.create_undead(self.__summon_id + 1)
+
+                if new_undead is not None and hasattr(new_undead, 'id'):
+                    ritual.perform(self.__resources)  # This just spends the resources but doesn't create the undead
+                    self.__summon_id += 1  # ID is incremented by 1 across the whole class
+
+                    # A new undead is created and appended to the necromancer's list
+                    self.__undead.append(new_undead)
+
+                else:
+                    print("Summoning ritual failed to create a valid undead.")
 
             else:
                 print("You do not have enough resources to cast this ritual.")

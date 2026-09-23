@@ -1,4 +1,26 @@
 class Undead:
+    """
+        Intended as the base class for all undead minion types, holding shared stats and behaviours
+
+        Attributes:
+            MIN_HEALTH (int): Minimum base health (0)
+            MAX_HEALTH (int): Maximum base health (100)
+            MIN_POWER (int): Minimum base power (0)
+            MAX_POWER (int): Maximum base power (100)
+            MAX_LEVEL (int): Maximum level attainable (100)
+            HEALTH_PER_LEVEL (int): Amount of health gained per level (2)
+            POWER_PER_LEVEL (int): Amount of power gained per level (2)
+            STARTING_LEVEL (int): Initial level of the creature (1)
+            id (int): Unique identifier for the minion
+            name (str): The name of the minion
+            health (int): The current health value
+            power (int): The current power value
+            level (int): The current level
+
+        Methods:
+            level_up(): Increases the creature's level and boosts its health and power stats
+            command(): Issues an order or action to the undead creature
+    """
 
     MIN_HEALTH = 0
     MAX_HEALTH = 100
@@ -26,19 +48,17 @@ class Undead:
             # Prints custom messages based on which parameters are under/over
             # Uses if statements because all applicable issues should be addressed at once
 
-            undead_name = name  # Temporary variable for naming the undead
-
             if health < self.MIN_HEALTH:
-                print(f"Health for \"{undead_name}\" must be at least {self.MIN_HEALTH}. You cannot set it to {health}.")
+                print(f"Health for \"{name}\" must be at least {self.MIN_HEALTH}. You cannot set it to {health}.")
 
             if health > self.MAX_HEALTH:
-                print(f"Health for \"{undead_name}\" cannot exceed {self.MAX_HEALTH}. You cannot set it to {health}.")
+                print(f"Health for \"{name}\" cannot exceed {self.MAX_HEALTH}. You cannot set it to {health}.")
 
             if power < self.MIN_POWER:
-                print(f"Power for \"{undead_name}\" must be at least {self.MIN_POWER}. You cannot set it to {power}.")
+                print(f"Power for \"{name}\" must be at least {self.MIN_POWER}. You cannot set it to {power}.")
 
             if power > self.MAX_POWER:
-                print(f"Power for \"{undead_name}\" cannot exceed {self.MAX_POWER}. You cannot set it to {power}.")
+                print(f"Power for \"{name}\" cannot exceed {self.MAX_POWER}. You cannot set it to {power}.")
 
         else:
             self.__id = id
@@ -64,12 +84,15 @@ class Undead:
     def get_level(self):
         return self.__level
 
+    # Levels up the undead, if no argument is provided it levels it up by 1 level
     def level_up(self, new_levels=1):
 
         if not isinstance(new_levels, int):
             print(f"Level must be an integer. Level up for {self.name} was unsuccessful.")
             return False
         else:
+
+            # For health and power, it adds (HEALTH/POWER)_PER_LEVEL) multiplied by how many levels to go up by
             new_level = self.level + new_levels
             new_health = self.health + (new_levels * self.HEALTH_PER_LEVEL)
             new_power = self.power + (new_levels * self.POWER_PER_LEVEL)

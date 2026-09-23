@@ -1,11 +1,27 @@
 class ResourceManager:
+    """
+        Intended to store, check, and spend the various rune and material resources required for rituals
+
+        Attributes:
+            MIN_RESOURCES (int): The minimum allowable resource count (0)
+            necrotic_runes (int): The amount of necrotic runes available
+            spirit_runes (int): The amount of spirit runes available
+            bone_runes (int): The amount of bone runes available
+            flesh_runes (int): The amount of flesh runes available
+            ectoplasm (int): The amount of ectoplasm available
+
+        Methods:
+            collect(): Gathers or increases resource quantities
+            has_resources(): Returns True if enough resources are available, otherwise False
+            spend_resources(): Deducts resources when a ritual or action is performed
+    """
 
     MIN_RESOURCES = 0
 
     def __init__(self, necrotic_runes, spirit_runes, bone_runes, flesh_runes, ectoplasm):
 
-        # Must be INTEGER and quantities should not begin below 0
-        # TODO: Not allowed to raise errors yet -- fix later
+        # Must be INTEGER and quantities should not begin below the minimum allowed quantity
+        # TODO: Not allowed to raise errors yet but I would prefer to
 
         resources = [
             necrotic_runes,
@@ -15,7 +31,7 @@ class ResourceManager:
             ectoplasm
         ]
 
-        # Goes through the list of inputted resources, and if it's less than 0 it just sets it to 0
+        # Goes through the list of inputted resources, and if it's less than 0 or not an integer it just sets it to 0
         for i in range(len(resources)):
             if not isinstance(resources[i], int) or resources[i] < self.MIN_RESOURCES:
                 print(f"Resource quantity must be an integer greater than or equal to {self.MIN_RESOURCES}.")
@@ -43,7 +59,7 @@ class ResourceManager:
         return (f"ResourceManager({self.__necrotic_runes}, {self.__spirit_runes}, {self.__bone_runes}, "
                 f"{self.__flesh_runes}, {self.__ectoplasm})")
 
-    def get_necrotic_runes(self) -> int:
+    def get_necrotic_runes(self):
         return self.__necrotic_runes
 
     def get_spirit_runes(self):
@@ -58,6 +74,7 @@ class ResourceManager:
     def get_ectoplasm(self):
         return self.__ectoplasm
 
+    # This adds more resources to the existing collection
     def collect(self, necrotic_runes, spirit_runes, bone_runes, flesh_runes, ectoplasm):
 
         # Must be INTEGER and quantities should not begin below 0
@@ -91,6 +108,7 @@ class ResourceManager:
         if insufficient_resources:
             print("Any values that were provided that were under 0 were not updated.")
 
+    # Checks if it has the resources and returns a Boolean value
     def has_resources(self, necrotic_runes, spirit_runes, bone_runes, flesh_runes, ectoplasm):
 
         # Returns True if all values are available, returns False if any are unavailable
@@ -113,8 +131,10 @@ class ResourceManager:
             self.__bone_runes -= bone_runes
             self.__flesh_runes -= flesh_runes
             self.__ectoplasm -= ectoplasm
+            return True
         else:
             print("You do not have enough resources.")
+            return False
 
     # Read-only properties
     necrotic_runes = property(get_necrotic_runes)

@@ -3,6 +3,23 @@ from summoning_ritual import SummoningRitual
 from undead import Undead
 
 class Necromancer:
+    """
+        Intended to represent a necromancer entity who can manage resources and summon undead minions
+
+        Attributes:
+            MAX_UNDEAD (int): The maximum number of undead creatures allowed (20)
+            name (str): The name of the necromancer
+            level (int): The current level of the necromancer
+            resources (list): The resource manager or collection of resources owned by the necromancer
+            undead (list): The list holding all current summoned undead creatures
+            summon_id (int): Number for keeping track of IDs of summoned undead
+
+        Methods:
+            summon(): Summons a new undead creature into the necromancer's service
+            dismiss(): Dismisses an existing undead creature from the necromancer's collection
+            level_undead(): Levels up an undead along with their health and power
+            find_undead(): Returns the Undead object with the matching ID
+    """
 
     MAX_UNDEAD = 20  # The max number of undead that can be controlled by one necromancer
 
@@ -26,32 +43,46 @@ class Necromancer:
         return self.__undead
 
     def summon(self, ritual):
-        if isinstance(ritual, SummoningRitual):
 
-            if ritual.can_perform(self.__resources):
+        # Checks if necromancer already has maximum undead capacity and prevents exceeding it
+        if len(self.undead) >= self.MAX_UNDEAD:
+            print(f"Necromancer \"{self.name}\" already has the maximum amount of undead ({self.MAX_UNDEAD})!")
+            print("Try dismissing existing undead then try again.")
+            return False
+        else:
 
-                # create_undead() may fail. This does error checking so that it is only appended to the Necromancer's
-                # list if it is a valid object
+            if isinstance(ritual, SummoningRitual):
 
-                new_undead = ritual.create_undead(self.__summon_id + 1)
+                if ritual.can_perform(self.__resources):
 
-                if new_undead is not None and hasattr(new_undead, 'id'):
-                    ritual.perform(self.__resources)  # This just spends the resources but doesn't create the undead
-                    self.__summon_id += 1  # ID is incremented by 1 across the whole class
+                    # create_undead() may fail. This does error checking so that it is appended to the
+                    # Necromancer's list ONLY IF it is a valid object
 
-                    # A new undead is created and appended to the necromancer's list
-                    self.__undead.append(new_undead)
+                    new_undead = ritual.create_undead(self.__summon_id + 1)
+
+                    # This ensures the instantiation worked before any major changes are made
+                    if new_undead is not None and hasattr(new_undead, 'id'):
+                        ritual.perform(self.__resources)  # This spends the resources but doesn't create the undead
+                        self.__summon_id += 1  # ID is incremented by 1 across the whole class
+
+                        # A new undead is created and appended to the necromancer's list
+                        self.__undead.append(new_undead)
+
+                        return True
+
+                    else:
+                        print("Summoning ritual failed to create a valid undead.")
+                        return False
 
                 else:
-                    print("Summoning ritual failed to create a valid undead.")
+                    print("You do not have enough resources to cast this ritual.")
+                    return False
 
             else:
-                print("You do not have enough resources to cast this ritual.")
+                print("The passed argument must be a SummoningRitual object.")
+                return False
 
-        else:
-            print("The passed argument must be a SummoningRitual object.")
-
-    # Dismisses an undead based on its id
+    # Dismisses an undead based on its ID
     def dismiss(self, searched_id):
         undead = self.find_undead(searched_id)
 
@@ -63,9 +94,10 @@ class Necromancer:
             print(f"The dismissal of undead with ID {searched_id} was unsuccessful.")
             return False
 
-    # Levels up an undead based on its id
+    # Levels up an undead based on its ID
     def level_undead(self, searched_id, new_levels):
 
+        # Finds the specific undead object based on its ID
         undead = self.find_undead(searched_id)
 
         if isinstance(undead, Undead):
@@ -81,6 +113,7 @@ class Necromancer:
             print(f"The levelling up of undead with ID {searched_id} was unsuccessful.")
             return False
 
+    # Returns the Undead object with the matching ID
     def find_undead(self, searched_id):
         if isinstance(searched_id, int):
 
@@ -90,7 +123,7 @@ class Necromancer:
                         return undead
 
                 print(f"An undead with the ID {searched_id} could not be found.")
-                return None  # Not sure whether to return False or None
+                return None
             else:
                 print("There are currently no undead being controlled by this necromancer.")
                 return None

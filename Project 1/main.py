@@ -3,7 +3,6 @@ from branch import Branch
 from savings_account import SavingsAccount
 from everyday_account import EverydayAccount
 from account import Account
-from transaction import Transaction
 
 # ----------------------------- Object Instantiation --------------------------------
 
@@ -101,3 +100,15 @@ print(isinstance(account_1, Account))
 print(isinstance(account_3, Account))
 print(account_1)
 print(account_3)
+
+# ---------------- Polymorphism Testing -------------
+
+print("\n\n\n\n\n")
+print(account_1)
+print(account_3)
+
+account_1.withdraw(201)
+account_3.withdraw(200)
+
+account_1.withdraw(1)
+account_3.withdraw(1500)

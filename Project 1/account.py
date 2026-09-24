@@ -1,13 +1,7 @@
-"""
-This class represents an account that belongs to a client.
-It's responsible for managing the account's financial information,
-and it provides methods for depositing/withdrawing money and checking
-the current balance.
-"""
-
 from transaction import Transaction
+from abc import ABC, abstractmethod
 
-class Account:
+class Account(ABC):
 
     __id_counter = 0
     __valid_accounts = ['everyday', 'savings']
@@ -21,10 +15,10 @@ class Account:
         # TODO: implement proper error raising instead of setting default values
 
         if isinstance(current_balance, (int, float)):
-            self.__current_balance = current_balance
+            self._current_balance = current_balance
         else:
             print("Current balance must be an integer or a float number.")
-            self.__current_balance = 0
+            self._current_balance = 0
             print("Current balance has been set to 0.")
 
         if isinstance(account_type, str) and account_type.lower().strip() in Account.__valid_accounts:
@@ -54,7 +48,7 @@ class Account:
         return self.__account_type
 
     def get_current_balance(self):
-        return self.__current_balance
+        return self._current_balance
 
     def get_description(self):
         return self.__description
@@ -79,30 +73,17 @@ class Account:
 
     def deposit(self, amount):  # Adds money to the account
         if isinstance(amount, (int, float)) and amount >= 0:
-            self.__current_balance += amount
+            self._current_balance += amount
             print(f"You have deposited ${amount} into account ({self.__id}).")
             print(f"Updated account balance: ${self.current_balance}")
 
             self.create_transaction(amount, "deposit", self.current_balance)
 
-        print()
+        print()  # Just used for formatting a blank line
 
+    @abstractmethod
     def withdraw(self, amount):  # Attempts to remove money from the account
-        if isinstance(amount, (int, float)) and amount >= 0:
-            if self.__current_balance - amount < 0:
-                print(
-                    f"You tried to withdraw ${amount} from account ({self.id}). (Balance: ${self.current_balance})")
-                print(
-                    "You cannot withdraw more money than the account contains. Please try again.")
-            else:
-                self.__current_balance -= amount
-                print(
-                    f"You have withdrawn ${amount} from account ({self.id}).")
-                print(f"Updated account balance: ${self.current_balance}")
-
-                self.create_transaction(amount, "withdraw", self.current_balance)
-
-        print()
+        pass
 
     def check_balance(self):
         print(f"Your balance is ${self.current_balance}.")

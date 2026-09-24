@@ -1,15 +1,42 @@
-"""
-This class represents a client of the financial company.
-Its responsibility is to store/manage information about a client.
-It also manages the client's list of financial accounts, and allows
-them to set a preferred branch.
-"""
-
 from account import Account
 from branch import Branch
 
 class Client:
+    """
+        Intended to represent a bank client who manages accounts and preferred branch settings
 
+        Attributes:
+            id_counter (int): Counter used to generate unique client IDs
+            valid_contacts (list[str]): List of valid contact method types allowed
+            id (int): Unique identifier for the client
+            name (str): The full name of the client
+            phone (int, str): The contact phone number of the client
+            email (str): The email address of the client
+            address (str): The residential address of the client
+            preferred_contact (str): The client's preferred mode of communication
+            account_list (list[Account]): List of account objects owned by the client
+            preferred_branch (str): The client's preferred bank branch
+
+        Methods:
+            get_name(): Returns the name of the client
+            get_phone(): Returns the phone number of the client
+            get_email(): Returns the email address of the client
+            get_address(): Returns the address of the client
+            get_id(): Returns the client's unique ID
+            get_preferred_contact(): Returns the preferred contact method string
+            get_account_list(): Returns the list of accounts owned by the client
+            get_preferred_branch(): Returns the preferred branch object or string
+            set_name(): Updates the name of the client
+            set_phone(): Updates the phone number of the client
+            set_email(): Updates the email address of the client
+            set_address(): Updates the residential address
+            set_preferred_contact(): Updates the preferred contact method
+            set_preferred_branch(): Sets the preferred bank branch
+            clear_preferred_branch(): Removes the current preferred branch assignment
+            clear_account_list(): Clears all accounts associated with the client
+            add_account(account): Adds a new account object to the client's account list
+            remove_account(account): Removes a specific account from the client's account list
+    """
     __id_counter = 0  # Used for assigning IDs to new clients
     __valid_contacts = ['phone', 'email']
 
@@ -135,19 +162,25 @@ class Client:
         if account not in self.__account_list:
             if isinstance(account, Account):
                 self.__account_list.append(account)
+                return True
             else:
                 print("New account must be an Account object.")
+                return False
         else:
             print("This account already belongs to this client!")
+            return False
 
     def remove_account(self, account):
         if account in self.__account_list:
             if isinstance(account, Account):
                 self.__account_list.remove(account)
+                return True
             else:
                 print("You must provide an Account object.")
+                return False
         else:
             print("This account does not belong to this client.")
+            return False
 
     name = property(get_name, set_name)
     phone = property(get_phone, set_phone)

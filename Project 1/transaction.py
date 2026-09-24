@@ -1,10 +1,27 @@
-"""
-This class represents a transaction made by an account.
-It stores information about a financial transaction, such as the
-amount of money, the type of transaction, and the status of the transaction.
-"""
-
 class Transaction:
+    """
+        Intended to record, process, and track individual financial transactions
+
+        Attributes:
+            transaction_num (int): Counter used to track transaction numbers
+            valid_statuses (list[str]): List of valid processing status strings
+            id (int): Unique identifier for the transaction
+            amount (int, float): The monetary value involved in the transaction
+            type (str): The transaction type such as deposit or withdrawal
+            description (str): Description or memo for the transaction
+            status (str): Current status of the transaction such as pending or processed
+
+        Methods:
+            get_amount(): Returns the monetary amount of the transaction
+            get_status(): Returns the current transaction status
+            get_id(): Returns the unique transaction ID
+            get_type(): Returns the transaction type category
+            get_description(): Returns the transaction description
+            set_description(): Updates the transaction description
+            change_status(new_status): Changes the status state of the transaction
+            process_transaction(): Executes and completes the transaction
+            cancel_transaction(): Cancels the transaction and updates its status
+    """
 
     __transaction_num = 0
     # Doesn't include "pending" because it should never go back to pending
@@ -19,7 +36,7 @@ class Transaction:
             self.__amount = amount
         else:
             print("Amount must be an integer or a float number.")
-            self.__amount = 0  # TODO: This is bad design, an error should be raised instead
+            self.__amount = 0
             print("Amount has been set to 0.")
 
         if isinstance(type, str):
@@ -73,13 +90,23 @@ class Transaction:
 
     def change_status(self, new_status):
         if self.__status in Transaction.__valid_statuses:
-            print(
-                f"The transaction status has already been set to \"{self.__status}\" can cannot be undone.")
+            print(f"The transaction status has already been set to \"{self.__status}\" can cannot be undone.")
+            return False
+
         else:
             if new_status.lower().strip() in Transaction.__valid_statuses:
                 self.__status = new_status
 
                 print(f"Transaction ({self.__id}) was {self.__status}.")
+                return True
+
+            else:
+                print(f"Invalid information was entered, account {self.id} status was not changed.")
+                return False
+
+    # We were instructed to put the following two classes in, but they don't do anything. and they don't make sense.
+    # In Account, transactions are always set to "processed" to begin with, and once a transaction is processed it
+    # cannot be changed back.
 
     def process_transaction(self):
         self.change_status('processed')

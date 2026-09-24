@@ -1,6 +1,17 @@
 from account import Account
 
 class EverydayAccount(Account):
+    """
+        Intended to represent an everyday checking account with single-withdrawal limits
+
+        Attributes:
+            MAX_WITHDRAW (int): The maximum allowable amount for a single withdrawal (1000)
+            Inherits all other attributes from Account
+
+        Methods:
+            withdraw(amount): Withdraws funds ensuring the single transaction maximum limit is respected
+            Inherits all other methods from Account
+    """
 
     MAX_WITHDRAW = 1000
 
@@ -14,6 +25,7 @@ class EverydayAccount(Account):
         if isinstance(amount, (int, float)):
             if amount > self.MAX_WITHDRAW:
                 print(f"The maximum you can withdraw is ${self.MAX_WITHDRAW}. Please try again.")
+                return False
             else:
 
                 # Standard withdrawal behaviour
@@ -22,6 +34,7 @@ class EverydayAccount(Account):
                         print(f"You tried to withdraw ${amount} from account ({self.id}). "
                             f"(Balance: ${self.current_balance})")
                         print("You cannot withdraw more money than the account contains. Please try again.")
+                        return False
                     else:
                         self._current_balance -= amount
                         print(f"You have withdrawn ${amount} from account ({self.id}).")
@@ -31,5 +44,10 @@ class EverydayAccount(Account):
 
                         print()  # Just used for formatting a blank line
 
+                        return True
+                else:
+                    return False
+
         else:
             print("Entered withdrawal amount must be a number.")
+            return False

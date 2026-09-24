@@ -2,6 +2,31 @@ from transaction import Transaction
 from abc import ABC, abstractmethod
 
 class Account(ABC):
+    """
+        Intended as an abstract base class representing a general bank account
+
+        Attributes:
+            id_counter (int): Counter used to generate unique account IDs
+            valid_accounts (list[str]): List of valid account types allowed
+            id (int): Unique identifier for the account
+            current_balance (int, float): The current balance held in the account
+            account_type (str): The type category of the account
+            description (str): Description or notes for the account
+            transactions (list[Transaction]): List of transactions processed on this account
+
+        Methods:
+            get_account_type(): Returns the type category of the account
+            get_current_balance(): Returns the current balance amount
+            get_description(): Returns the description of the account
+            get_id(): Returns the account's unique ID
+            get_transactions(): Returns the list of associated transactions
+            set_account_type(new_account_type): Updates the account type string
+            set_description(new_desc): Updates the account description
+            deposit(amount): Adds money to the account balance
+            withdraw(): Abstract method for withdrawing funds to be implemented by subclasses
+            check_balance(): Displays or verifies the current balance
+            create_transaction(amount, type, new_balance): Creates and appends a new transaction
+    """
 
     __id_counter = 0
     __valid_accounts = ['everyday', 'savings']
@@ -11,8 +36,6 @@ class Account(ABC):
         # ID assignment logic (auto-increment +1 for every new instance)
         Account.__id_counter += 1
         self.__id = Account.__id_counter
-
-        # TODO: implement proper error raising instead of setting default values
 
         if isinstance(current_balance, (int, float)):
             self._current_balance = current_balance

@@ -1,12 +1,27 @@
-"""
-This class represents one branch of the organisation.
-It's responsible for storing/managing information about a branch,
-including its name, location, phone number, and open/closed status.
-It provides methods to view and change appropriate information,
-including the open/closed status.
-"""
-
 class Branch:
+    """
+        Intended to manage bank branch details and operational status
+
+        Attributes:
+            branch_counter (int): Counter used to track or generate branch IDs
+            name (str): The name of the bank branch
+            location (str): The physical location or address of the branch
+            phone (int, str): The contact phone number for the branch
+            is_open (bool): The operational status indicating if the branch is currently open
+
+        Methods:
+            get_number(): Returns the branch identifier number
+            get_name(): Returns the name of the branch
+            get_location(): Returns the location string of the branch
+            get_phone(): Returns the phone number of the branch
+            get_is_open(): Returns True if the branch is open, otherwise False
+            set_location(): Updates the physical location of the branch
+            set_phone(): Updates the phone number of the branch
+            change_status(new_status): Updates the open or closed status of the branch
+            open_branch(): Opens the branch for business operations
+            close_branch(): Closes the branch operations
+            change_phone(): Modifies or updates the contact phone details
+    """
 
     __branch_counter = 0
 
@@ -87,14 +102,18 @@ class Branch:
     def open_branch(self):
         if self.__is_open:
             print(f"Branch {self.__number} is already open.")
+            return False
         else:
             self.change_status(True)
+            return True
 
     def close_branch(self):
         if not self.__is_open:
             print(f"Branch {self.__number} is already closed.")
+            return False
         else:
             self.change_status(False)
+            return True
 
     def change_phone(self, new_phone):
         self.set_phone(new_phone)

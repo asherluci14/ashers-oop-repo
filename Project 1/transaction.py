@@ -57,7 +57,7 @@ class Transaction:
             self.__status = status
         else:
             print("Status can only be set to \"pending\", \"cancelled\", or \"processed\".")
-            self.__preferred_contact = "pending"
+            self.__status = "pending"
             print("Status has been set to \"pending\".")
 
     def __str__(self):

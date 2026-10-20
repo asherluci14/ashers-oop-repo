@@ -1,0 +1,44 @@
+This text file outlines some justifications for my design decisions for Project 3, which is a "clone" of a game
+purchasing storefront such as Steam.
+
+It aims to explain why I have made certain choices in the development of my system.
+
+
+
+#### Publisher -> Product Association
+
+The Publisher class has methods like publish_game() which take product initialiser values and instantiate Product
+objects. Products do not exist in the system without having been published by a publisher, so an aggregation wouldn't
+work.
+
+This fits the definition of a composition, as Product creation is controlled by Publisher. However, I've decided to go
+with association because composition implies lifecycle ownership, and if a publisher entity changes or goes inactive,
+their published games should NOT be deleted.
+
+
+
+#### Store inside Publisher
+
+The Publisher class has a store attribute that locks all of its published Products into that store. In a real-world
+scenario, this would not be accurate. Publishers can publish to a variety of storefronts, like Steam, Epic Games, the
+PlayStation Store, and more, so I originally planned to pass the store into Publisher.publish_game() (and the other
+publishing methods). I was going to allow multiple stores to be created, but that is out of scope for this project.
+
+I am creating a system of one singular storefront, like Steam, and designing the ecosystem around that one store. Thus,
+to enforce this single-store constraint, the Store is provided at Publisher initialisation. We separately solve the
+problem of being able to create multiple stores by using a singleton.
+
+
+
+#### Store singleton
+
+We are only implementing one storefront (i.e. Steam). We do not want publishers to be able to publish games to multiple
+storefronts for the scope of this project, although that would make sense in a real-world scenario.
+
+To enforce this, I have implemented a Singleton, which restricts the "Store" class to a single instance by overriding
+the Store.__new__() method and the Store.__init__() method.
+
+
+
+#### Accessing the Store object
+

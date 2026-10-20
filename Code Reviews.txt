@@ -88,3 +88,16 @@ As we move forward, I will change the levelling system into level_up(self, level
 to level up by as its only parameter, with a default value of 1. I will then test the new system to ensure it works
 with everything else as intended. For the MRO, none of my code was incorrect, but it's important to keep it in mind as
 the project proceeds.
+
+--------------------------------------------
+WEEK 7 - Preparing for Project 3
+24 September 2026 with Arie
+
+Arie and I discussed my plans for what to make in Project 3. My initial idea was to make a visual novel engine. There
+would be characters and subtypes of characters (friends, villains). There would be composition (player can have
+friends). There would be multiple inheritance (there are types of story scenarios (e.g. text, choice, event) and
+multiple can be inherited for a scene). However, one of the big issues with this was that it is too simple to implement,
+and the majority of the work comes from story/dialogue writing instead of actually demonstrating OOP concepts in Python.
+
+As we move forward I will continue to think about what project I can make in order to meet the specifications and
+showcase all of the important OOP concepts that we've learned so far.

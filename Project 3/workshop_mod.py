@@ -31,7 +31,7 @@ class WorkshopMod(GameAddon):
     def get_details(self) -> str:
         return_string = (f"\"{self.title}\""
                          f"\nProduct type: Workshop Mod (DLC/UGC)"
-                         f"\nBase game: \"{self.base_game}\""
+                         f"\nBase game: \"{self.base_game.title}\""
                          f"\nPrice: ${self.price}"
                          f"\nPublisher: {self.publisher.name}"
                          f"\nVersion: {self.version}"

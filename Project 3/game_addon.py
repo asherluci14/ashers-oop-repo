@@ -23,7 +23,7 @@ class GameAddon(DLC):
     def get_details(self) -> str:
         return_string = (f"\"{self.title}\""
                          f"\nProduct type: Game Addon (DLC)"
-                         f"\nBase game: \"{self.base_game}\""
+                         f"\nBase game: \"{self.base_game.title}\""
                          f"\nPrice: ${self.price}"
                          f"\nPublisher: {self.publisher.name}"
                          f"\nFile size: {self.file_size} MB")

@@ -42,3 +42,24 @@ the Store.__new__() method and the Store.__init__() method.
 
 #### Accessing the Store object
 
+Because the Store is a singleton, when another class interacts with the store, it usually just instantiates Store()
+there. For example, when a Publisher publishes a product, it uses Store().add_product(product) to list it to the store.
+I chose this because I feel it is cleaner for a few reasons:
+
+    1) You don't have to pass the store in as a parameter each time when there can only be one store
+    2) It conceptually doesn't make sense to have the store as an attribute of Publisher
+
+
+
+#### relist_product() and add_product() (in the Store class)
+
+Store.relist_product() is a method that relists a product to the store after it has been delisted (which is also done
+by the store). Behind the scenes, relist_product() just calls add_product(). However, I have kept them separated for
+a few reasons:
+
+    1) For another user/developer looking at my system, add_product() sounds like a new game is being added to the
+    catalogue, and it doesn't suggest that relisting a product is even possible
+    2) In the future I may want to add additional functionality to delisting/relisting a product that doesn't apply
+    to the normal add_product() method. This helps keep it open for extension.
+
+    Note: by 22/10/2026 the functions now have different functionalities

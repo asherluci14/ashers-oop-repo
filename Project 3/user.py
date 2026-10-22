@@ -5,7 +5,7 @@ from product import Product
 
 class User:
 
-    user_id = 0  # Used for assigning incrementing IDs to ALL User objects
+    user_id = 0  # Used for assigning incrementing IDs to all User objects
 
     def __init__(self, username: str, wallet: int | float):
 
@@ -19,7 +19,7 @@ class User:
         self.__wallet = wallet  # Measured in dollars ($), can be a float or integer
         self.__library = Library()  # The library is created by the user (composition)
 
-        # Increments the product ID by 1 and assigns it to the private attribute "id"
+        # Increments the user ID by 1 and assigns it to the private attribute "id"
         User.user_id += 1
         self.__id = User.user_id
 

@@ -9,17 +9,19 @@ Finished classes:
 - Publisher
 - Library
 - Store
-
-
-Halfway done:
-- WorkshopMod
 - UserGeneratedContent
-- User
-- CommunityHub
-
-
-Still need to make:
 - Review
 - Video
 - Screenshot
 - Discussion
+
+
+Halfway done:
+- WorkshopMod
+- User
+- CommunityHub
+
+
+
+Things to do:
+- Check all isinstance(x, int) also rejects booleans

@@ -4,7 +4,7 @@ class Library:
 
     def __init__(self):
 
-        self.__collection = []  # THe user's collection of Product objects will be stored in here
+        self.__collection = []  # The user's collection of Product objects will be stored in here
 
     def __str__(self):
         return f"A library of items purchased from the store, containing {len(self.__collection)} products."

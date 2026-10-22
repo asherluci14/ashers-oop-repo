@@ -26,6 +26,8 @@ class Account(ABC):
             withdraw(): Abstract method for withdrawing funds to be implemented by subclasses
             check_balance(): Displays or verifies the current balance
             create_transaction(amount, type, new_balance): Creates and appends a new transaction
+            view_transactions(): Returns a string showing the account's full transaction history
+            find_transactions_above(number): Returns a string showing all transactions where amount >= number
     """
 
     __id_counter = 0
@@ -58,7 +60,7 @@ class Account(ABC):
             self.__description = ""
             print("Description has been set to an empty string.")
 
-        self.__transactions = []
+        self.__transactions = []  # Stored in a list as specified
 
     def __str__(self):
         return (f"{self.account_type.capitalize()} account (id: {self.id}) "
@@ -114,8 +116,42 @@ class Account(ABC):
     def create_transaction(self, amount, type, new_balance):
         self.transactions.append(Transaction(amount=amount,
                                              type=str(type),
-                                             description=f'Resulting balance: {new_balance}',
+                                             description=f'Resulting balance: ${new_balance}',
                                              status="processed"))
+
+    def view_transactions(self):
+
+        return_string = f"Transaction history for account {self.id}:"
+
+        for transaction in self.__transactions:
+            return_string += f"\n - {str(transaction)}"
+
+        return return_string
+
+    def find_transactions_above(self, number) -> str:
+
+        if isinstance(number, int):
+
+            matching_transactions = []
+
+            for transaction in self.transactions:
+                if transaction.amount >= number:
+                    matching_transactions.append(transaction)
+
+            if len(matching_transactions) == 0:
+                return f"Account {self.id} has no transactions where amount >= {number}."
+
+            else:
+
+                return_string = f"All transaction for account {self.id} where amount >= {number}:"
+
+                for transaction in matching_transactions:
+                    return_string += f"\n - {str(transaction)}"
+
+                return return_string
+
+        else:
+            return "Number parameter must be an integer."
 
     id = property(get_id)
     current_balance = property(get_current_balance)

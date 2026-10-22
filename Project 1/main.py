@@ -65,7 +65,8 @@ client_1.add_account(account_1)
 client_1.add_account(account_3)
 client_2.add_account(account_2)
 print(client_1.account_list)
-client_1.remove_account(account_1)
+
+client_1.remove_account(1)  ## VERIFIED WORKING
 print(client_1.account_list)
 
 print(account_1.current_balance)
@@ -112,3 +113,30 @@ account_3.withdraw(200)
 
 account_1.withdraw(1)
 account_3.withdraw(1500)
+
+
+# ---------------- Wk 8-2 Testing -------------
+
+client_4 = Client(
+    name="Alex Jones",
+    phone="+1-555-0103",
+    email="alex.jones@example.com",
+    address="789 Pine Road, Riverdale, CA 90210",
+    preferred_contact="email"
+)
+
+account_4 = SavingsAccount(100, 'savings', 3.5)
+account_5 = SavingsAccount(20, "", 3)
+account_6 = EverydayAccount(1738, "Everyday acc")
+
+client_4.add_account(account_4)
+client_4.add_account(account_5)
+client_4.add_account(account_6)
+
+print(client_4.find_account(4))
+account_4.deposit(2800)
+account_4.deposit(1738)
+account_4.withdraw(200)
+print(account_4.view_transactions()) # working
+print(account_4.find_transactions_above(2000))
+print(account_4.find_transactions_above(40000))

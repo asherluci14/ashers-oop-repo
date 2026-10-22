@@ -14,7 +14,7 @@ class Client:
             email (str): The email address of the client
             address (str): The residential address of the client
             preferred_contact (str): The client's preferred mode of communication
-            account_list (list[Account]): List of account objects owned by the client
+            account_list (dict[int: Account]): Dictionary of account objects owned by the client
             preferred_branch (str): The client's preferred bank branch
 
         Methods:
@@ -35,8 +35,10 @@ class Client:
             clear_preferred_branch(): Removes the current preferred branch assignment
             clear_account_list(): Clears all accounts associated with the client
             add_account(account): Adds a new account object to the client's account list
-            remove_account(account): Removes a specific account from the client's account list
+            remove_account(number): Removes a specific account from the client's account list through its ID
+            find_account(number): Returns an account from the client's account list from its ID
     """
+
     __id_counter = 0  # Used for assigning IDs to new clients
     __valid_contacts = ['phone', 'email']
 
@@ -80,7 +82,7 @@ class Client:
             self.__preferred_contact = "email"
             print("Preferred contact has been set to \"email\".")
 
-        self.__account_list = []  # Clients can have multiple accounts
+        self.__account_list = {}  # Clients can have multiple accounts -- uses a dictionary
 
         self.__preferred_branch = ""
 
@@ -159,9 +161,9 @@ class Client:
         print("The account list has been cleared and is now empty.")
 
     def add_account(self, account):
-        if account not in self.__account_list:
+        if account.id not in self.__account_list:
             if isinstance(account, Account):
-                self.__account_list.append(account)
+                self.__account_list[account.id] = account
                 return True
             else:
                 print("New account must be an Account object.")
@@ -170,17 +172,27 @@ class Client:
             print("This account already belongs to this client!")
             return False
 
-    def remove_account(self, account):
-        if account in self.__account_list:
-            if isinstance(account, Account):
-                self.__account_list.remove(account)
+    def remove_account(self, number):
+
+        if isinstance(number, int):
+            if number in self.__account_list:  # This checks the keys of account_list
+                self.__account_list.pop(number)
                 return True
+
             else:
-                print("You must provide an Account object.")
+                print("This account does not belong to this client.")
                 return False
         else:
-            print("This account does not belong to this client.")
+            print("Number parameter must be an integer.")
             return False
+
+    def find_account(self, number):
+        if isinstance(number, int):
+            return self.__account_list.get(number)
+
+        else:
+            print("Number parameter must be an integer.")
+            return None
 
     name = property(get_name, set_name)
     phone = property(get_phone, set_phone)

@@ -1,30 +1,30 @@
 from publisher import Publisher
 from game import Game
-from dlc import DLC
+from game_addon import GameAddon  # Updated import for concrete class
 from store import Store  # Assuming your Store class is saved in store.py
 
-# --- Existing DLC Testing ---
+# --- Existing Game & Addon Testing ---
 p = Publisher("Team Cherry")
 g = Game("Hollow Knight", 20, p, "1.0", 2000)
-d = DLC("Hidden Dreams", 0, p, g)
+addon = GameAddon("Hidden Dreams", 0, p, g, "500")  # Using GameAddon with file size
 
-print("--- DLC Relationship Test ---")
-print("Initial DLCs:", g.list_dlcs())
-g.add_dlc(d)
-print("After adding DLC:", g.list_dlcs())
+print("--- DLC / GameAddon Relationship Test ---")
+print("Initial Add-ons:", g.list_dlcs())  # (Assuming your game tracks DLC/add-ons via this method)
+g.add_dlc(addon)
+print("After adding Add-on:", g.list_dlcs())
 
 print("\n" + "="*50 + "\n")
 
 # --- Store Singleton & E-Commerce Testing ---
 print("--- Store Singleton Test ---")
-store1 = Store("Steam")
+store1 = Store("McDonalds")
 store2 = Store()  # Should point to the exact same instance!
 print(f"Are store1 and store2 the exact same instance? {store1 is store2}")
 print(f"Store Name: {store1.name}")
 
 print("\n--- Adding Products to Store ---")
 store1.add_product(g)
-store1.add_product(d)
+store1.add_product(addon)
 
 # Try adding a duplicate product (should be ignored safely)
 store1.add_product(g)

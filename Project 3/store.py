@@ -8,19 +8,19 @@ class Store:
             # Put very simply, this allocates the memory for the instance
             cls.instance = super(Store, cls).__new__(cls)
 
+            # This is here because the store gets renamed every time Store() is instantiated if it's in the __init__()
+            cls.instance.__name = name
+            cls.instance.__catalogue = []
+            cls.instance.__delisted_products = []
+
         # If it's the first time initialising Store() it creates, saves, and returns it
         # If Store() has already been initialised once, it just skips creation and return the original Store object
         return cls.instance
 
     # Initialises the store. Only one store can exist in this system.
     def __init__(self, name="Steam"):
-
-        # Prevent re-initialising attributes if the singleton already exists
-        if not hasattr(self, '__initialised'):
-            self.__name = name
-            self.__catalogue = []  # Products that are actively available for purchase by users
-            self.__delisted_products = []  # Delisted products that cannot be purchased
-            self.__initialised = True  # It doesn't really matter what you set this to; __init__ checks for existence
+        # __new__() handles everything, the __init__() does not need any new code
+        pass
 
     def __str__(self):
         pass

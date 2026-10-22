@@ -80,6 +80,7 @@ class Store:
     # Private helper method -- shouldn't be used outside of this class
     def __display_products(self, product_list):
         """Private helper method to avoid repeating display logic."""
+
         if len(product_list) == 0:
             print("No products found.")
 
@@ -92,11 +93,13 @@ class Store:
 
     def display(self):
         """Displays all active products currently for sale in the store."""
+
         print(f"=== {self.name} Store Catalogue ===")
         self.__display_products(self.__catalogue)
 
     def display_delisted(self):
         """Displays all delisted products."""
+
         print(f"=== {self.name} Delisted Archive ===")
         self.__display_products(self.__delisted_products)
 

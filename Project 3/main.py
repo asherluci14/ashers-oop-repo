@@ -1,7 +1,7 @@
 from publisher import Publisher
 from game import Game
-from game_addon import GameAddon  # Updated import for concrete class
-from store import Store  # Assuming your Store class is saved in store.py
+from game_addon import GameAddon
+from store import Store
 
 # --- Existing Game & Addon Testing ---
 p = Publisher("Team Cherry")
@@ -9,7 +9,7 @@ g = Game("Hollow Knight", 20, p, "1.0", 2000)
 addon = GameAddon("Hidden Dreams", 0, p, g, "500")  # Using GameAddon with file size
 
 print("--- DLC / GameAddon Relationship Test ---")
-print("Initial Add-ons:", g.list_dlcs())  # (Assuming your game tracks DLC/add-ons via this method)
+print("Initial Add-ons:", g.list_dlcs())  # (Assuming game tracks DLC/add-ons via this method)
 g.add_dlc(addon)
 print("After adding Add-on:", g.list_dlcs())
 

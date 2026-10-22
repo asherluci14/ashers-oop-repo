@@ -64,3 +64,7 @@ try:
     store1.add_product("This is just a random string, not a Product instance")
 except TypeError as e:
     print(f"Successfully caught expected TypeError: {e}")
+
+# quick test of how "in" keyword works
+v = 'end'
+print('yes' if v in 'friend' else 'x')

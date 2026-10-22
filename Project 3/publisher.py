@@ -6,6 +6,7 @@ class Publisher:
 
     def __init__(self, name):
 
+        # Type checking
         if not isinstance(name, str):
             raise TypeError("Name must be a string.")
 

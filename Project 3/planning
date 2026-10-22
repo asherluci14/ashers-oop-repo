@@ -7,10 +7,11 @@ Finished classes:
 - Artwork
 - GameAddon
 - Publisher
+- Library
+- Store
 
 
 Halfway done:
-- Store
 - WorkshopMod
 - UserGeneratedContent
 - User
@@ -18,8 +19,7 @@ Halfway done:
 
 
 Still need to make:
-- Library
 - Review
 - Video
-- Artwork
+- Screenshot
 - Discussion

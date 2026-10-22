@@ -101,5 +101,41 @@ class Store:
         self.__display_products(self.__delisted_products)
 
     def search_catalogue(self, keyword: str):
-        pass
-        # TODO: Implement later, this is a bit out of scope
+        """Searches the public catalogue for products containing the keyword in any attribute."""
+
+        if not isinstance(keyword, str):
+            raise TypeError("Search keyword must be a string.")
+
+        keyword = keyword.lower().strip()
+        matching_products = []
+
+        # Uses the concrete classes' implementation of get_details() to search for the keyword
+        for product in self.__catalogue:
+
+            details = product.get_details().lower().strip()
+
+            if keyword in details:
+                matching_products.append(product)
+
+        self.__display_products(matching_products)
+
+        return matching_products
+
+    def search_title(self, keyword: str):
+        """Searches the public catalogue for products containing the keyword in the title."""
+
+        if not isinstance(keyword, str):
+            raise TypeError("Search keyword must be a string.")
+
+        keyword = keyword.lower().strip()
+        matching_products = []
+
+        # Uses the Products' title attribute to search their titles for the keyword
+        for product in self.__catalogue:
+
+            if keyword in product.title.lower().strip():
+                matching_products.append(product)
+
+        self.__display_products(matching_products)
+
+        return matching_products

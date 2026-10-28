@@ -6,7 +6,7 @@ class Video(UserGeneratedContent):
         super().__init__(title, author, game)
 
         # Type checking for all new parameters
-        if not isinstance(length, (int, float)):
+        if not isinstance(length, (int, float)) or isinstance(length, bool):
             raise TypeError("Length parameter must be an integer or float number.")
         if not isinstance(resolution, str):
             raise TypeError("Resolution parameter must be a string (e.g. 1920x1080).")

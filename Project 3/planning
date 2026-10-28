@@ -15,13 +15,15 @@ Finished classes:
 - Screenshot
 - Discussion
 - CommunityHub
+- WorkshopMod
+- User
+- Check all isinstance(x, int) also rejects booleans
 
 
 Halfway done:
-- WorkshopMod
-- User
 
 
 
 Things to do:
-- Check all isinstance(x, int) also rejects booleans
+- Try put try/except in somewhere just to include it
+- Implement pytest

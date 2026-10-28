@@ -6,7 +6,7 @@ class GameAddon(DLC):
         super().__init__(title, price, publisher, base_game)
 
         # Type checking for all new parameters
-        if not isinstance(file_size, str):
+        if not isinstance(file_size, int):
             raise TypeError("File size parameter is measured in megabytes (MB) and must be an integer.")
 
         self.__file_size = file_size  # File size of the Game Addon, measured in MB

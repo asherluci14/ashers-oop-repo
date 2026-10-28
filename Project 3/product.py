@@ -10,7 +10,7 @@ class Product(ABC):
         # Type checking for all parameters
         if not isinstance(title, str):
             raise TypeError("Title parameter must be a string.")
-        if not isinstance(price, (int, float)):
+        if not isinstance(price, (int, float)) or isinstance(price, bool):
             raise TypeError("Price parameter is measured in dollars ($) and must be an integer or float number.")
         if not isinstance(publisher, Publisher):
             raise TypeError("Publisher parameter must be a Publisher object.")

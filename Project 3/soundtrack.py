@@ -6,9 +6,9 @@ class Soundtrack(DLC):
         super().__init__(title, price, publisher, base_game)
 
         # Type checking for all new parameters
-        if not isinstance(tracks, int):
+        if not isinstance(tracks, int) or isinstance(tracks, bool):
             raise TypeError("Tracks parameter must be an integer.")
-        if not isinstance(length, (int, float)):
+        if not isinstance(length, (int, float)) or isinstance(length, bool):
             raise TypeError("Length parameter is measured in minutes and must be an integer or a float.")
 
         self.__tracks = tracks  # Number of tracks in the soundtrack

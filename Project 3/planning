@@ -25,5 +25,5 @@ Halfway done:
 
 
 Things to do:
-- Try put try/except in somewhere just to include it
+- Implement try/except on EVERY raise statement
 - Implement pytest

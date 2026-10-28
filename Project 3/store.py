@@ -23,8 +23,9 @@ class Store:
         pass
 
     def __str__(self):
-        pass
-        # TODO: i'll do this later
+        return (f"The \"{self.name}\" store where products can be purchased from. "
+                f"The public catalogue has {len(self.__catalogue)} products available for purchase. "
+                f"There are also {len(self.__delisted_products)} delisted products.")
 
     def get_name(self):
         return self.__name

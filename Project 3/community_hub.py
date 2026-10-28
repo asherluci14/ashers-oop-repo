@@ -21,6 +21,10 @@ class CommunityHub:
         # __new__() handles everything, the __init__() does not need any new code
         pass
 
+    def __str__(self):
+        return (f"A community hub containing all of the user generated content posted by every user. "
+                f"Currently has {len(self.__feed)} posts.")
+
     def get_feed(self):
         return self.__feed
 
